@@ -1,0 +1,10 @@
+.Articles {
+  padding: 24px 24px 40px 24px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .Articles {
+    padding: 60px;
+    max-width: 700px;
+  }
+}

@@ -6,9 +6,9 @@ import { getArticles, getArticle } from '@/lib/newt'
 import styles from '@/styles/Article.module.css'
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 export const dynamicParams = false
 
 export async function generateMetadata({ params }: Props) {
-  const { slug } = params
+  const { slug } = await params
   const article = await getArticle(slug)
 
   const title = article?.meta?.title || article?.title
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = params
+  const { slug } = await params
   const article = await getArticle(slug)
   if (!article) {
     notFound()
